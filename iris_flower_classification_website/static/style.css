@@ -1,0 +1,583 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+--green: #173f32;
+--green-light: #6c8972;
+--ink: #242720;
+--muted: #808b81;
+--cream: #f8f8f2;
+--purple: #8c79a8;
+}
+
+* {
+  box-sizing: border-box;
+  }
+
+body {
+margin: 0;
+min-height: 100vh;
+background: var(--cream);
+color: var(--ink);
+font-family: 'DM Sans', Arial, sans-serif;
+}
+
+.topbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 22px 8%;
+border-bottom: 1px solid #e5e8df;
+}
+
+.brand {
+color: var(--green);
+font-family: 'Playfair Display', Georgia, serif;
+font-size: 27px;
+font-weight: 700;
+text-decoration: none;
+}
+
+.topbar span {
+color: var(--muted);
+font-size: 14px;
+}
+
+/* Main content card */
+.hero {
+width: min(900px, 92%);
+margin: 40px auto;
+padding: 35px;
+background: white;
+border: 1px solid #e7e9e1;
+border-radius: 22px;
+box-shadow: 0 14px 40px rgba(23, 63, 50, 0.07);
+animation: bloomIn 0.7s ease both;
+}
+
+.eyebrow {
+color: var(--green-light);
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 2px;
+}
+
+h1 {
+margin: 14px 0;
+color: var(--green);
+font-family: 'Playfair Display', Georgia, serif;
+font-size: clamp(32px, 5vw, 46px);
+line-height: 1.2;
+}
+
+h1 span {
+color: var(--purple);
+}
+
+.intro {
+margin-bottom: 28px;
+color: #687168;
+line-height: 1.7;
+}
+
+/* Flower banner: fixed height and contained image */
+.flower-banner {
+position: relative;
+width: 100%;
+height: 240px;
+margin: 24px 0;
+overflow: hidden;
+border-radius: 16px;
+background: #e8eee5;
+isolation: isolate;
+}
+
+.flower-banner img {
+display: block;
+width: 100%;
+height: 100%;
+max-width: 100%;
+object-fit: cover;
+object-position: center;
+border-radius: inherit;
+transition: transform 0.5s ease;
+}
+
+.flower-banner:hover img {
+transform: scale(1.03);
+}
+
+.image-caption {
+position: absolute;
+right: 0;
+bottom: 0;
+left: 0;
+padding: 35px 22px 18px;
+color: white;
+background: linear-gradient(transparent, rgba(20, 45, 32, 0.8));
+}
+
+.image-caption span {
+font-size: 10px;
+letter-spacing: 2px;
+font-weight: 700;
+}
+
+.image-caption p {
+margin: 7px 0 0;
+font-family: 'Playfair Display', Georgia, serif;
+font-size: 22px;
+}
+
+/* Input form */
+form {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 20px;
+}
+
+label {
+display: flex;
+flex-direction: column;
+gap: 9px;
+color: #3c493f;
+font-size: 14px;
+font-weight: 600;
+}
+
+input {
+width: 100%;
+min-width: 0;
+padding: 13px;
+border: 1px solid #dce2d9;
+border-radius: 9px;
+background: #fcfdf9;
+font: inherit;
+}
+
+input:focus {
+outline: 2px solid #91ad96;
+border-color: var(--green-light);
+}
+
+button {
+grid-column: 1 / -1;
+padding: 15px;
+border: none;
+border-radius: 10px;
+background: var(--green);
+color: white;
+font: inherit;
+font-weight: 700;
+cursor: pointer;
+transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+background: #285c49;
+transform: translateY(-1px);
+}
+
+/* Prediction result */
+.result,
+.result-premium {
+margin-top: 26px;
+padding: 20px;
+border-radius: 12px;
+background: #edf5ed;
+color: var(--green);
+animation: bloomIn 0.5s ease both;
+}
+
+.result h2,
+.result-premium h2 {
+margin-top: 0;
+}
+
+/* Prediction image */
+.result img,
+.result-premium img {
+display: block;
+width: 100%;
+max-width: 280px;
+height: 190px;
+margin: 15px auto;
+object-fit: cover;
+object-position: center;
+border-radius: 12px;
+}
+
+/* Flower species gallery */
+.species-section {
+margin-top: 40px;
+}
+
+.species-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 20px;
+}
+
+.species-card {
+min-width: 0;
+overflow: hidden;
+border: 1px solid #e7e9e1;
+border-radius: 14px;
+background: white;
+box-shadow: 0 8px 20px rgba(23, 63, 50, 0.05);
+}
+
+.species-card img {
+display: block;
+width: 100%;
+height: 180px;
+max-width: 100%;
+object-fit: cover;
+object-position: center;
+}
+
+.species-card h3,
+.species-card p {
+margin-right: 15px;
+margin-left: 15px;
+}
+
+.species-card h3 {
+color: var(--green);
+font-family: 'Playfair Display', Georgia, serif;
+}
+
+.species-card p {
+color: #687168;
+font-size: 13px;
+line-height: 1.6;
+overflow-wrap: anywhere;
+}
+
+.error {
+margin-top: 20px;
+color: #b42318;
+}
+
+.note {
+margin-top: 28px;
+color: var(--muted);
+font-size: 12px;
+text-align: center;
+}
+
+@keyframes bloomIn {
+from {
+opacity: 0;
+transform: translateY(12px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* Responsive layout */
+@media (max-width: 650px) {
+.hero {
+width: 94%;
+margin: 24px auto;
+padding: 22px 18px;
+}
+
+.topbar {
+    padding: 18px 5%;
+}
+
+.topbar span {
+    font-size: 11px;
+}
+
+.flower-banner {
+    height: 190px;
+}
+
+form {
+    grid-template-columns: 1fr;
+}
+
+button {
+    grid-column: 1;
+}
+
+.species-grid {
+    grid-template-columns: 1fr;
+}
+
+.species-card img {
+    height: 220px;
+}
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+.flower-banner img,
+button {
+transition: none;
+}
+
+.hero,
+.result,
+.result-premium {
+    animation: none;
+}
+
+}
+.species-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 22px;
+}
+
+.species-card {
+overflow: hidden;
+background: #ffffff;
+border: 1px solid #e2e8df;
+border-radius: 14px;
+box-shadow: 0 5px 18px rgba(23, 63, 50, 0.08);
+transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.species-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 12px 25px rgba(23, 63, 50, 0.14);
+}
+
+.species-card img {
+display: block;
+width: 100%;
+height: 190px;
+object-fit: cover;
+}
+
+.species-card h3 {
+margin: 16px 15px 8px;
+color: #173f32;
+}
+
+.species-card p {
+margin: 10px 15px 18px;
+line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+.species-grid {
+grid-template-columns: 1fr;
+}
+}
+/* ===== IrisBloom Premium Botanical Upgrade ===== */
+
+body {
+    background: #f6f7ef;
+    color: #252c25;
+}
+
+/* Main website card */
+.hero {
+    width: min(1000px, 92%);
+    padding: 38px;
+    border: 1px solid #e5e9df;
+    border-radius: 24px;
+    box-shadow: 0 16px 45px rgba(23, 63, 50, 0.08);
+}
+
+/* Elegant flower banner */
+.flower-banner {
+    height: 260px;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(23, 63, 50, 0.10);
+}
+
+.flower-banner img {
+    object-position: center;
+}
+
+/* Better input fields */
+input {
+    padding: 14px 15px;
+    border-radius: 11px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #6c8972;
+    box-shadow: 0 0 0 3px rgba(108, 137, 114, 0.15);
+}
+
+/* Premium green button */
+button {
+    padding: 16px;
+    border-radius: 11px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 5px 12px rgba(23, 63, 50, 0.12);
+}
+
+button:hover {
+    box-shadow: 0 8px 18px rgba(23, 63, 50, 0.18);
+}
+
+/* Flower gallery layout */
+.species-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.species-card {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e5e9df;
+    border-radius: 17px;
+    box-shadow: 0 6px 20px rgba(23, 63, 50, 0.06);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.species-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px rgba(23, 63, 50, 0.12);
+}
+
+.species-card img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.species-card h3 {
+    margin: 17px 15px 8px;
+    color: #173f32;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+.species-card p {
+    margin: 0 15px 20px;
+    color: #687168;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Prediction result */
+.result,
+.result-premium {
+    border: 1px solid #dce8da;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(23, 63, 50, 0.05);
+}
+
+.result img,
+.result-premium img {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    height: 190px;
+    margin: 16px auto;
+    object-fit: cover;
+    border-radius: 13px;
+}
+
+/* Mobile-friendly layout */
+@media (max-width: 650px) {
+    .hero {
+        width: 94%;
+        padding: 22px 18px;
+    }
+
+    .flower-banner {
+        height: 190px;
+    }
+
+    .species-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .species-card img {
+        height: 220px;
+    }
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .species-card,
+    input,
+    button {
+        transition: none;
+    }
+
+    .species-card:hover,
+    button:hover {
+        transform: none;
+    }
+}
+
+/* ===== IrisBloom AI Prediction Dashboard ===== */
+
+.result,
+.result-premium {
+max-width: 760px;
+margin: 35px auto;
+padding: 30px;
+background: linear-gradient(135deg, #ffffff, #f0f6ed);
+border: 1px solid #dce8da;
+border-radius: 22px;
+box-shadow: 0 14px 35px rgba(23, 63, 50, 0.10);
+text-align: center;
+}
+
+.result h2,
+.result-premium h2 {
+color: #173f32;
+font-family: 'Playfair Display', Georgia, serif;
+font-size: 30px;
+}
+
+.result img,
+.result-premium img {
+display: block;
+width: 100%;
+max-width: 340px;
+height: 230px;
+margin: 22px auto;
+object-fit: cover;
+border-radius: 16px;
+box-shadow: 0 8px 22px rgba(23, 63, 50, 0.12);
+}
+
+.result p,
+.result-premium p {
+color: #687168;
+line-height: 1.8;
+}
+
+.result h3,
+.result-premium h3 {
+color: #173f32;
+font-size: 25px;
+margin: 12px 0;
+}
+
+.result .confidence,
+.result-premium .confidence {
+color: #285c49;
+font-weight: 700;
+}
+
+@media (max-width: 600px) {
+.result,
+.result-premium {
+padding: 20px 15px;
+}
+
+.result img,
+.result-premium img {
+    max-width: 100%;
+    height: 200px;
+}
+
+}

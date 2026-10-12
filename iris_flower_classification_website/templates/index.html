@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IrisBloom | Flower Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="brand" href="/">IrisBloom</a>
+        <span>AI Flower Classification</span>
+    </header>
+
+    <main class="hero">
+        <p class="eyebrow">MACHINE LEARNING PROJECT</p>
+
+        <div class="flower-banner">
+            <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Wild_iris_flower_iris_setosa.jpg"
+                alt="Iris setosa flowers"
+            >
+            <div class="image-caption">
+                <span>THE BEAUTY OF NATURE</span>
+                <p>Every flower tells a story.</p>
+            </div>
+        </div>
+
+        <h1>Discover your <span>Iris flower</span></h1>
+
+        <p class="intro">
+            Enter the flower's measurements and let our machine-learning
+            model predict its species.
+        </p>
+
+        <form method="POST" action="/">
+            <label>Sepal length (cm)
+                <input type="number" name="sepal_length"
+                       step="any" min="0.1" max="10" required>
+            </label>
+
+            <label>Sepal width (cm)
+                <input type="number" name="sepal_width"
+                       step="any" min="0.1" max="10" required>
+            </label>
+
+            <label>Petal length (cm)
+                <input type="number" name="petal_length"
+                       step="any" min="0.1" max="10" required>
+            </label>
+
+            <label>Petal width (cm)
+                <input type="number" name="petal_width"
+                       step="any" min="0.1" max="10" required>
+            </label>
+
+            <button type="submit">Predict flower species</button>
+        </form>
+
+        {% if prediction %}
+        <section class="result result-premium">
+            <div class="result-heading">
+                <span class="success-icon">✓</span>
+                <h2>Prediction Result</h2>
+                <span class="confidence-badge">AI Prediction</span>
+            </div>
+
+            <div class="result-content">
+                {% if 'setosa' in prediction|lower %}
+                <img class="predicted-flower"
+                     src="https://commons.wikimedia.org/wiki/Special:FilePath/Wild_iris_flower_iris_setosa.jpg"
+                     alt="Iris setosa">
+                {% elif 'versicolor' in prediction|lower %}
+                <img class="predicted-flower"
+                     src="https://commons.wikimedia.org/wiki/Special:FilePath/Iris_versicolor_2.jpg"
+                     alt="Iris versicolor">
+                {% else %}
+                <img class="predicted-flower"
+                     src="https://commons.wikimedia.org/wiki/Special:FilePath/IMG_7911-Iris_virginica.jpg"
+                     alt="Iris virginica">
+                {% endif %}
+
+                <div class="result-details">
+                    <p class="result-label">PREDICTED SPECIES</p>
+                    <h3>{{ prediction|title }}</h3>
+
+                    {% if confidence is defined %}
+                    <p class="confidence-text">
+                        Model confidence:
+                        <strong>{{ confidence }}%</strong>
+                    </p>
+                    <div class="confidence-track">
+                        <div class="confidence-fill"
+                             data-confidence="{{ confidence }}"></div>
+                    </div>
+                    {% endif %}
+
+                    <p class="result-description">
+                        Your flower measurements have been analyzed by
+                        the IrisBloom machine-learning model.
+                    </p>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <section class="species-section">
+            <div class="species-heading">
+                <div>
+                    <p class="eyebrow">EXPLORE THE DATASET</p>
+                    <h2>Meet the Iris family</h2>
+                </div>
+                <p>Three species. Four measurements. One AI model.</p>
+            </div>
+
+            <div class="species-grid">
+                <article class="species-card setosa">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Wild_iris_flower_iris_setosa.jpg"
+                        alt="Iris setosa flower"
+                        loading="lazy"
+                    >
+                    <div class="species-info">
+                        <h3>Iris setosa</h3>
+                        <p>Class 0</p>
+                        <span>Typically has smaller petals.</span>
+                    </div>
+                </article>
+
+                <article class="species-card versicolor">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Iris_versicolor_2.jpg"
+                        alt="Iris versicolor blue flag flower"
+                        loading="lazy"
+                    >
+                    <div class="species-info">
+                        <h3>Iris versicolor</h3>
+                        <p>Class 1</p>
+                        <span>Intermediate flower measurements.</span>
+                    </div>
+                </article>
+
+                <article class="species-card virginica">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/IMG_7911-Iris_virginica.jpg"
+                        alt="Iris virginica flower"
+                        loading="lazy"
+                    >
+                    <div class="species-info">
+                        <h3>Iris virginica</h3>
+                        <p>Class 2</p>
+                        <span>Often has larger petals.</span>
+                    </div>
+                </article>
+            </div>
+
+            <p class="gallery-note">
+                Photographs show the named iris species.
+                Image credits and licences are available through Wikimedia Commons.
+            </p>
+        </section>
+
+        <p class="note">Powered by Python, Flask and Scikit-learn</p>
+    </main>
+</body>
+</html>
